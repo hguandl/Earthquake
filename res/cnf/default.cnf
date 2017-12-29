@@ -1,0 +1,4 @@
+# Replace main.cnf if it has problems
+web_url=https\://www.emsc-csem.org/Earthquake/?view\=
+location=res/data/earthquakes-1.sqlite
+lang=en

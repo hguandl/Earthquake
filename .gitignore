@@ -1,0 +1,19 @@
+# macOS system file
+._*
+.DS_Store
+
+# Java binary
+*.class
+*.jar
+
+# Compile output
+bin/
+
+# IDEA misc
+.idea/*
+
+# Include libraries
+!lib/*.jar
+
+# Other excluded files
+exclude/
