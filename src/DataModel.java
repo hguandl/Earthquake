@@ -24,7 +24,8 @@ public class DataModel {
     DataModel(){
         try {
             Class.forName("org.sqlite.JDBC");
-            prop.load(new FileInputStream("res/cnf/main.cnf"));
+            prop.load(this.getClass().getResourceAsStream("res/cnf/main.cnf"));
+            // String name = this.getClass().getResource("/" + prop.getProperty("location")).getPath();
             String name = prop.getProperty("location");
             con = DriverManager.getConnection("jdbc:sqlite:"+name);
             con.setAutoCommit(true);

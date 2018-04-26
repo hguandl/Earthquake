@@ -105,17 +105,12 @@ public class Controller implements Initializable {
     private static Properties langCnf = new Properties();
     private static Properties mainCnf = new Properties();
 
-    private static BufferedReader readerMain;
-    private static BufferedReader reader;
-
     private void initLang(String locale) throws Exception {
         try {
-            reader = new BufferedReader(new FileReader("res/cnf/lang/" + locale + ".cnf"));
-            langCnf.load(reader);
+            langCnf.load(this.getClass().getResourceAsStream("res/cnf/lang/" + locale + ".cnf"));
         } catch (FileNotFoundException e) {
             System.out.println("Cannot find the locale file.");
-            reader = new BufferedReader(new FileReader("res/cnf/lang/en.cnf"));
-            langCnf.load(reader);
+            langCnf.load(this.getClass().getResourceAsStream("res/cnf/lang/en.cnf"));
         }
         lFrom.setText(langCnf.getProperty("From") + ": ");
         lTo.setText(langCnf.getProperty("To") + ": ");
@@ -155,14 +150,12 @@ public class Controller implements Initializable {
     public void initPreferences() throws Exception {
         String locale;
         try {
-            readerMain = new BufferedReader(new FileReader("res/cnf/main.cnf"));
-            mainCnf.load(readerMain);
+            mainCnf.load(this.getClass().getResourceAsStream("res/cnf/main.cnf"));
             locale = mainCnf.getProperty("lang");
         } catch (FileNotFoundException e) {
             System.err.println("Cannot find the main config file.");
             return ;
         }
-        readerMain.close();
         if (locale == null)
             locale = defaultLang();
         initLang(locale);
@@ -480,7 +473,7 @@ public class Controller implements Initializable {
         mainCnf.setProperty("lang", toLangCode(lang.getValue()));
         mainCnf.setProperty("location", dbDir.getText());
         mainCnf.setProperty("web_url", updateURL.getText());
-        FileOutputStream outputFile = new FileOutputStream("res/cnf/main.cnf");
+        FileOutputStream outputFile = new FileOutputStream(this.getClass().getResource("res/cnf/main.cnf").getFile());
         mainCnf.store(outputFile, "");
         outputFile.close();
         initPreferences();

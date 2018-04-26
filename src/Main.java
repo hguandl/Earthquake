@@ -4,13 +4,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.*;
+
 public class Main extends Application{
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
+            Parent root = FXMLLoader.load(this.getClass().getResource("res/view.fxml"));
             Scene scene = new Scene(root);
-            scene.getStylesheets().add("EarthQuakeCSS.css");
+            scene.getStylesheets().add("res/EarthQuakeCSS.css");
             primaryStage.setTitle("Earthquake");
             primaryStage.setScene(scene);
             primaryStage.show();
